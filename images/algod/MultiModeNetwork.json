@@ -1,0 +1,149 @@
+{
+    "Genesis": {
+        "NetworkName": "multimodenet",
+        "FirstPartKeyRound": 0,
+        "LastPartKeyRound":  NETWORK_NUM_ROUNDS,
+        "Wallets": [
+            {
+                "Name": "Wallet1",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet2",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet3",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet4",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet5",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet6",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet7",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet8",
+                "Stake": 5,
+                "Online": true
+            },
+            {
+                "Name": "Wallet9",
+                "Stake": 5,
+                "Online": true
+            },
+            {
+                "Name": "Wallet10",
+                "Stake": 10,
+                "Online": true
+            },
+            {
+                "Name": "Wallet11",
+                "Stake": 5,
+                "Online": true
+            },
+            {
+                "Name": "Wallet12",
+                "Stake": 5,
+                "Online": true
+            }
+        ],
+        "RewardsPoolBalance": 0
+    },
+    "Nodes": [
+        {
+            "Name": "Node",
+            "IsRelay": true,
+            "Wallets": [
+                {
+                    "Name": "Wallet1",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet2",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet3",
+                    "ParticipationOnly": false
+                }
+            ]
+        },
+        {
+            "Name": "Node2",
+            "IsRelay": true,
+            "Wallets": [
+                {
+                    "Name": "Wallet4",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet5",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet6",
+                    "ParticipationOnly": false
+                }
+            ]
+        },
+        {
+            "Name": "Node3",
+            "IsRelay": true,
+            "Wallets": [
+                {
+                    "Name": "Wallet7",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet8",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet9",
+                    "ParticipationOnly": false
+                }
+            ]
+        },
+        {
+            "Name": "Node4",
+            "IsRelay": true,
+            "Wallets": [
+                {
+                    "Name": "Wallet10",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet11",
+                    "ParticipationOnly": false
+                },
+                {
+                    "Name": "Wallet12",
+                    "ParticipationOnly": false
+                }
+            ]
+        },
+        {
+            "Name": "Follower",
+            "Wallets": [],
+            "ConfigJSONOverride": "{\"EnableFollowMode\":true,\"CatchupBlockValidateMode\":3,\"EndpointAddress\":\"0.0.0.0:ALGOD_FOLLOWER_PORT\", \"EnableTxnEvalTracer\": true, \"MaxAcctLookback\": 256}"
+        }
+    ]
+}

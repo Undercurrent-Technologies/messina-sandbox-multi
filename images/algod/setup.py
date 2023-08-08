@@ -103,7 +103,19 @@ def configure_data_dir(network_dir, token, algod_port, kmd_port, bootstrap_url, 
     # Set tokens
     with open(join(node_dir, 'algod.token'), 'w') as f:
         f.write(token)
+    with open(join(node_dir + "2", 'algod.token'), 'w') as f:
+        f.write(token)
+    with open(join(node_dir + "3", 'algod.token'), 'w') as f:
+        f.write(token)
+    with open(join(node_dir + "4", 'algod.token'), 'w') as f:
+        f.write(token)
     with open(join(node_dir, 'algod.admin.token'), 'w') as f:
+        f.write(token)
+    with open(join(node_dir + "2", 'algod.admin.token'), 'w') as f:
+        f.write(token)
+    with open(join(node_dir + "3", 'algod.admin.token'), 'w') as f:
+        f.write(token)
+    with open(join(node_dir + "4", 'algod.admin.token'), 'w') as f:
         f.write(token)
     if has_follower:
         with open(join(follower_dir, 'algod.token'), 'w') as f:
@@ -123,6 +135,13 @@ def configure_data_dir(network_dir, token, algod_port, kmd_port, bootstrap_url, 
     print(f"writing to node_config_path=[{node_config_path}] config json: {node_config}")
     with open(node_config_path, "w") as f:
         f.write(node_config)
+
+    with open(join(node_dir + "2", "config.json"), "w") as f:
+        f.write(node_config.replace(algod_port, str(int(algod_port) + 2)))
+    with open(join(node_dir + "3", "config.json"), "w") as f:
+        f.write(node_config.replace(algod_port, str(int(algod_port) + 3)))
+    with open(join(node_dir + "4", "config.json"), "w") as f:
+        f.write(node_config.replace(algod_port, str(int(algod_port) + 4)))
 
     kmd_config_path = join(kmd_dir, 'kmd_config.json')
     kmd_config = f'{{ "address":"0.0.0.0:{kmd_port}",  "allowed_origins":["*"] }}'

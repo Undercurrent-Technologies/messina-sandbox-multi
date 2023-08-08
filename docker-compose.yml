@@ -26,6 +26,9 @@ services:
       - ${KMD_PORT:-4002}:4002
       - ${CDT_PORT:-9392}:9392
       - ${ALGOD_FOLLOWER_PORT:-3999}:3999
+      - 4003:4003
+      - 4004:4004
+      - 4005:4005
 
   indexer:
     container_name: "${INDEXER_CONTAINER:-algorand-sandbox-indexer}"

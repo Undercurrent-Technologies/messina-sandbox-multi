@@ -319,6 +319,32 @@ sandbox () {
     dc exec -T indexer-db postgres -V
   }
 
+  accounts_helper () {
+    ACCOUNTS_OUTPUT=$(goal_helper account list)
+    for acct in $(echo "$ACCOUNTS_OUTPUT" | cut -f 3 |tr -s ' '); do
+      ACCOUNTS+=($acct)
+      break
+    done
+
+    MNEMONIC_OUTPUT=$(goal_helper account export -a "${ACCOUNTS[0]}" -d /opt/testnetwork/Node)
+    MNEMONICS+=($(echo "$MNEMONIC_OUTPUT" | grep -o '".*"' | tr -d '"'))
+
+    for i in {2..4}
+    do
+      ACCOUNTS_OUTPUT=$(goal_helper account list -d /opt/testnetwork/Node$i)
+      for acct in $(echo "$ACCOUNTS_OUTPUT" | cut -f 3 |tr -s ' '); do
+        ACCOUNTS+=($acct)
+        break
+      done
+      MNEMONIC_OUTPUT=$(goal_helper account export -a "${ACCOUNTS[$i-1]}" -d /opt/testnetwork/Node$i)
+      MNEMONICS+=(",")
+      MNEMONICS+=($(echo "$MNEMONIC_OUTPUT" | grep -o '".*"' | tr -d '"'))
+    done
+
+    statusline "Mnemonic"
+    echo "${MNEMONICS[*]}"
+  }
+
   # Given a network name attempts to fetch a catchpoint and catchup.
   perform_fast_catchup () {
     goal_helper node catchup "$1"
@@ -607,16 +633,8 @@ sandbox () {
         #####################
         goal_helper wallet -f unencrypted-default-wallet > /dev/null 2>&1
 
-        ACCOUNTS_OUTPUT=$(goal_helper account list)
-        for acct in $(echo "$ACCOUNTS_OUTPUT" | cut -f 3 |tr -s ' '); do
-          ACCOUNTS+=($acct)
-        done
+        accounts_helper
 
-        statusline "Available accounts"
-        printc $default "~$ ${blue}./sandbox ${teal}goal account list"
-        echo "$ACCOUNTS_OUTPUT"
-        statusline "Example command to send between two accounts:"
-        printc $default "~$ ${blue}./sandbox ${teal}goal clerk send -a 123456789 -f ${ACCOUNTS[1]} -t ${ACCOUNTS[2]}"
         statusline "Soon after sending the transaction it will appear in indexer:"
         printc $default "~$ ${blue}curl ${teal}\"localhost:$IPORT/v2/transactions?pretty\""
       else
